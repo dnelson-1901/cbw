@@ -1,4 +1,14 @@
-CFLAGS = -g
+CFLAGS = -g -O -Wall
+CFLAGS+=-Wno-return-mismatch \
+	-Wno-deprecated-non-prototype \
+	-Wno-implicit-function-declaration \
+	-Wno-implicit-int \
+	-Wno-return-type
+#CFLAGS+= -Werror=pointer-integer-compare
+CFLAGS+= -Wno-unused-variable -Wno-unused-but-set-variable
+#CFLAGS+= -fsanitize=address
+#CFLAGS+= -fsanitize=memory
+#CC:=	ccache $(CC)
 
 # Object files for for the workbench.
 cbreq =	pword.o lpair.o approx.o \
@@ -9,40 +19,42 @@ cbreq =	pword.o lpair.o approx.o \
 		pgate.o perm.o terminal.o \
 		keylib.o windowlib.o dline.o screen.o 
 
+all: cbw zeecode
+
 # The main program.
 cbw: start.o $(cbreq) 
-	cc $(CFLAGS) start.o $(cbreq) \
+	$(CC) $(CFLAGS) start.o $(cbreq) \
 	-lcurses -ltermcap -lm -o cbw
 
 # Program to decrypt files after they have been broken by CBW.
 zeecode: zeecode.o
-	cc $(CFLAGS) zeecode.o -o zeecode
+	$(CC) $(CFLAGS) zeecode.o -o zeecode
 
 # Program to encrypt files, this is identical to the
 # Unix crypt function based on a two rotor enigma.
 enigma: enigma.o
-	cc $(CFLAGS) enigma.o -o enigma
+	$(CC) $(CFLAGS) enigma.o -o enigma
 
 #
 # The remaining files are test drivers.
 #
 
 bd: bdriver.o $(cbreq)
-	cc -g bdriver.o $(cbreq) -lm \
+	$(CC) -g bdriver.o $(cbreq) -lm \
 	-lcurses -ltermcap -lm -o bd
 
 sd: sdriver.o $(cbreq)
-	cc -g sdriver.o $(cbreq) \
+	$(CC) -g sdriver.o $(cbreq) \
 	-lcurses -ltermcap -lm -o sd
 
 approx: approx.o
-	cc -g approx.o -lm -o approx
+	$(CC) -g approx.o -lm -o approx
 
 stats: stats.o char-io.o
-	cc -g stats.o char-io.o -lm -o stats
+	$(CC) -g stats.o char-io.o -lm -o stats
 
 tri: tdriver.o $(cbreq)
-	cc -g tdriver.o $(cbreq) -lm \
+	$(CC) -g tdriver.o $(cbreq) -lm \
 	-lcurses -ltermcap -lm -o tri
 
 ectreq = edriver.o eclass.o cipher.o char-io.o \
@@ -54,15 +66,16 @@ ectreq = edriver.o eclass.o cipher.o char-io.o \
 
 
 ect: $(ectreq)
-	cc -g $(ectreq) -lm \
+	$(CC) -g $(ectreq) -lm \
 	-o ect
 
 ptt: char-io.o probtab.o
-	cc -g char-io.o probtab.o -lm -o ptt
+	$(CC) -g char-io.o probtab.o -lm -o ptt
 
 dt: disptest.o keylib.o windowlib.o screen.o
-	cc disptest.o keylib.o windowlib.o screen.o -o dt
+	$(CC) disptest.o keylib.o windowlib.o screen.o -o dt
 
 triplace: triplace.o
 
-
+clean:
+	rm -f *.o *~ cbw zeecode

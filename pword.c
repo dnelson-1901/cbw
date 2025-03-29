@@ -120,13 +120,13 @@ char	*wtab[];
 			buffree--;
 			if (buffree <= 1)  break;
 			}
-		*charbuf++ = NULL;
+		*charbuf++ = 0;
 		buffree--;
 		if (wordlength == 0  ||  buffree <= 0)  break;
 		wtab[wordindex++] = wordstart;
 		}
 
-	wtab[wordindex] = NULL;
+	wtab[wordindex] = 0;
 
 	fclose(inp);
 	return(NULL);
@@ -187,7 +187,7 @@ int			pvec[];
 
 	p = word;
 	wordlen = 0;
-	while (*p++ != NULL)  wordlen++;
+	while (*p++ != 0)  wordlen++;
 	eci = pwdi->eci;
 	added = permvec_from_string(pwdi->eci, word, pos, permvec);
 	if (added == ERROR)  return(-1.0);

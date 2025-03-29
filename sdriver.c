@@ -43,7 +43,7 @@ char	*argv[];
 		for (p = plainbuf ; (c=read_char(stdin)) != EOL ; *p++ = c )  {
 			length++;
 			}
-		*p = NULL;
+		*p = 0;
 
 		stripdots(plainbuf, str);
 		str2pvec(str, pvec);
@@ -106,7 +106,7 @@ char	*in, *out;		/* Null terminated strings. */
 		else
 			in++;
 		}
-	*out = NULL;
+	*out = 0;
 }
 
 

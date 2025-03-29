@@ -6,11 +6,11 @@
 /* 
  * Routines in terminal abstraction:
  *
- *	set_term()
+ *	setup_term()
  *		Initialize terminal, clear the screen.
  *
- *	unset_term()
- *		Return terminal to state before set_term().
+ *	unsetup_term()
+ *		Return terminal to state before setup_term().
  *
  *	char2sym(char)
  *		Return the symbol used to display the given char in the
@@ -98,7 +98,6 @@
 
 
 #include	<curses.h>
-#include	<sgtty.h>
 #include	<strings.h>
 #include	"window.h"
 #include	"terminal.h"
@@ -196,12 +195,6 @@ keycmd	keycmdtab[100];
 keycmd	*keycmdp;		/* Pointer to next free entry. */
 
 
-
-/* Saved process control characters.
- */
-struct	tchars	saved_tchars;
-
-
 /* Buffer for termcap entry. */
 #define TBUFSIZ 1024
 char	buf[TBUFSIZ];
@@ -216,18 +209,18 @@ int	termmode = -1;
  * and termcap subroutine packages, although the old code is used
  * for screen refresh.
  */
-set_term()
+setup_term()
 {
 	printf("\n\nInitializing terminal ...");
 	fflush(stdout);
 
+	initscr();
 	get_termstrs();
 	get_genv();
 	get_kenv();
 	savetty();
-	crmode();
+	cbreak();
 	noecho();
-	noflow();
 	Puts(term_is);
 	Puts(start_kp);
 	enter_mode(SMNORMAL);
@@ -506,38 +499,6 @@ char	**strp;
 }
 
 
-/* Turn off flow control characters.
- */
-noflow()
-{
-	struct	tchars	new_tchars;
-	
-	/* Turn off C-Q, C-S flow control. */
-	if (ioctl(0, TIOCGETC, &saved_tchars) < 0)  {
-		perror("noflow iocl get");
-		exit(1);
-	}
-	new_tchars = saved_tchars;
-	new_tchars.t_stopc = -1;
-	new_tchars.t_startc = -1;
-	if (ioctl(0, TIOCSETC, &new_tchars) < 0)  {
-		perror("noflow iocl set");
-		exit(1);
-	}
-}
-
-
-/* Restore the flow control characters.
- */
-restore_flow()
-{
-	if (ioctl(0, TIOCSETC, &saved_tchars) < 0)  {
-		perror("restore_flow iocl set");
-		exit(1);
-	}
-}
-
-
 /* Read in the termcap strings.
  */
 get_termstrs()
@@ -609,14 +570,13 @@ get_termstrs()
 
 /* Restore the terminal to its original mode.
  */
-unset_term()
+unsetup_term()
 {
 	enter_mode(SMNORMAL);
 	Puts(end_kp);		/* Can't tell if this is original. */
 	fflush(stdout);
-	nocrmode();
+	nocbreak();
 	echo();
-	restore_flow();
 	resetty();
 }
 

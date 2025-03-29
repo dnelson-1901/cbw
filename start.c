@@ -10,9 +10,10 @@
  */
 
 
-#include	<stdio.h>
-#include	<signal.h>
 #include	<setjmp.h>
+#include	<signal.h>
+#include	<stdio.h>
+#include	<stdlib.h>
 #include	"window.h"
 #include	"terminal.h"
 #include	"layout.h"

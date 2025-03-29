@@ -98,15 +98,14 @@
 
 
 #include	<curses.h>
+#include	<stdio.h>
+#include	<stdlib.h>
+#include	<string.h>
 #include	<strings.h>
+#include	<term.h>
 #include	"window.h"
 #include	"terminal.h"
 #include	"specs.h"
-
-
-/* Routines from termcap library.
- */
-extern	char *getenv(), *tgetstr(), *tgoto();
 
 
 /* Screen control strings from termcap entry.

@@ -32,6 +32,8 @@
 
 #include <stdio.h>
 #include <strings.h>
+#include <curses.h>
+#include <term.h>
 #include "window.h"
 #include "terminal.h"
 #include "specs.h"

@@ -8,6 +8,7 @@
 
 
 #include	<stdio.h>
+#include	<stdlib.h>
 #include	"window.h"
 #include	"terminal.h"
 #include	"layout.h"
@@ -131,7 +132,6 @@ char	*args;
 	displine *line;
 	int	nextline;	/* Index of next line to put result. */
 	char	*dictfile;
-	extern	char	*getenv();
 
 	row = rowcursor();
 	col = colcursor();

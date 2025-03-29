@@ -167,7 +167,7 @@ int	*pvec;
 	while (*pvec != NONE)  {
 		count += 1.0;
 		c = *pvec++;
-		if (c != c & CHARMASK)  return(-1.0);
+		if (c != (c & CHARMASK))  return(-1.0);
 		tmp = logprob[c & CHARMASK];
 		if (tmp == 0.0)  return(-1.0);
 		sum += tmp;
@@ -209,7 +209,7 @@ int	*pvec;
 	while (*pvec != NONE)  {
 		count += 1.0;
 		c = *pvec++;
-		if (c != c & CHARMASK)  return(0.0);
+		if (c != (c & CHARMASK))  return(0.0);
 		tmp = logprob[c & CHARMASK];
 		if (tmp == 0.0)  return(0.0);
 		tmp = tmp - logmean;
@@ -245,7 +245,7 @@ int	*pvec;
 	while (*pvec != NONE)  {
 		count += 1.0;
 		c = *pvec++;
-		if (c != c & CHARMASK)  return(0.0);
+		if (c != (c & CHARMASK))  return(0.0);
 		product *= prob[c] * count;
 		}
 

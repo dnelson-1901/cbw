@@ -169,7 +169,7 @@ char	cipher[];
 int		perm[];
 atrinfo	*atri;
 {
-extern	int	*trig_loaded;
+extern	int	trig_loaded;
 	int		i;
 
 	atri->eci = &gecinfo;

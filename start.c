@@ -50,13 +50,13 @@ char		pfilebuf[100];
  */
 jmp_buf		saved_stack;
 
+void	stop_handler(int);
+void	kill_handler(int);
 
 main(argc, argv)
 int		argc;
 char	*argv[];
 {
-	extern	stop_handler();
-	extern	kill_handler();
 	char	*q, *pp, *pc;
 
 	if (argc < 2)  {
@@ -106,7 +106,7 @@ char	*argv[];
  * Restore screen and exit.
  * On restart, setup screen, redraw screen, and abort to top loop.
  */
-stop_handler()
+void stop_handler(int sig)
 {
 	setcursor(MAXHEIGHT, 1);
 	fflush(stdout);
@@ -124,7 +124,7 @@ stop_handler()
 /* Handle C-C signal (kill program).
  * Restore screen and exit.
  */
-kill_handler()
+void kill_handler(int sig)
 {
 	setcursor(MAXHEIGHT, 1);
 	printf("\n");

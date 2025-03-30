@@ -146,7 +146,7 @@ char	*str;		/* Command line */
 		}
 	else {
 		if (to <= from)
-			return("To: must be less than From:");
+			return("To: must be greater than From:");
 		}
 	
 	dbssetblk(&dbstore, to+1);

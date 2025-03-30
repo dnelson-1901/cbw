@@ -122,7 +122,7 @@ symgraph	{
  */
 #define	DKEYMAP		"ta=\024:up=\020:do=\016:le=\002:ri=\006:\
  			 re=\014:un=\007:cl=\025:ws=\027:\
- 			 df=\\004:db=\177:jc=\030:ex=\\n:\
+ 			 df=\\004:db=\177:jc=\030:ex=\\r:\
  			 pr=\022:ne=\023:ac=\001"
 
 

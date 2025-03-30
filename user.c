@@ -49,7 +49,7 @@ cmdent	usrcmdtab[] = {
 		{"load-permutations", permload},
 		{"save-permutations", permsave},
 		{"clear-zee permutation", clearzee},
-		{"propagate-info from: % to: % using Zee", pgate},
+		{"propagate-info from: %-% to: %-% using Zee", pgate},
 		{"bigram-guess level: % (2.0), min_prob: % (0.15)", lpbguess},
 		{0, NULL},
 		};

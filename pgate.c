@@ -62,7 +62,7 @@ char	*str;
 
 			if (!dbsmerge(&dbstore, tmp2perm))  {
 				wl_rcursor(&user);
-				return("Merge conflicts with current plaintext.");
+				return(statmsg);
 				}
 
 			wl_rcursor(&user);

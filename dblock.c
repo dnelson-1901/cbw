@@ -248,7 +248,7 @@ int	perm[];		/* Permutation */
 	for (i = 0 ; i < BLOCKSIZE ; i++)  {
 		if (perm[i] != NONE  &&  dbsi->perm[i] != NONE
 		 && perm[i] != dbsi->perm[i]) {
-			sprintf(statmsg, "Guess conflicts with current plaintext!");
+			sprintf(statmsg, "Guess conflicts with current plaintext at offset %d!", i);
 			usrstatus(&user, statmsg);
 			return(FALSE);
 			}

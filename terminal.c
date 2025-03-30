@@ -132,6 +132,8 @@ char	*term_up;		/* Up arrow. */
 char	*term_down;		/* Down arrow. */
 char	*term_left;		/* Left arrow. */
 char	*term_right;		/* Right arrow. */
+char	*term_bs;		/* Backspace. */
+char	*term_del;		/* Delete. */
 
 
 /* Symbol names for the shell variable 'GRAPHICS'
@@ -304,6 +306,18 @@ char	*str;
 		strcat(str, cmdnames[CJUMPCMD - 1].label);
 		strcat(str, "=");
 		strcat(str, term_f4);
+		strcat(str, ":");
+	}
+	if (term_bs != NULL)  {
+		strcat(str, cmdnames[CDELB - 1].label);
+		strcat(str, "=");
+		strcat(str, term_bs);
+		strcat(str, ":");
+	}
+	if (term_del != NULL)  {
+		strcat(str, cmdnames[CDELF - 1].label);
+		strcat(str, "=");
+		strcat(str, term_del);
 		strcat(str, ":");
 	}
 }
@@ -564,6 +578,14 @@ get_termstrs()
 	term_down = tgetstr("kd", &fr);
 	term_left = tgetstr("kl", &fr);
 	term_right = tgetstr("kr", &fr);
+	term_bs = tgetstr("bs", &fr);
+	term_del = tgetstr("kD", &fr);
+
+	if (term_bs == NULL)
+		term_bs = "\x08";
+
+	if (term_del == NULL)
+		term_del = "\x7F";
 }
 
 

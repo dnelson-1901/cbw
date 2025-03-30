@@ -15,7 +15,7 @@
 #include	"specs.h"
 
 
-#define	DICTNAME	"/usr/dict/words"
+#define	DICTNAME	"/usr/share/dict/words"
 #define	DICTVAR		"DICTIONARY"	/* Name of shell var. */
 #define	WEBHELP		"Word match is invoked using the 'lookup' command"
 #define	TOPINDEX	2

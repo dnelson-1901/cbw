@@ -21,7 +21,7 @@
 #define WIREWIDTH	23	/* Number of chars from WIREFORMAT */
 #define WIREFORMAT	"Know %3d of 128 wires  "
 #define	WIRECOL		(LINELEN - WIREWIDTH + 1)  /* Starting column. */
-#define	BLOCKFORMAT	"Block - %d"
+#define	BLOCKFORMAT	"Block - %d "
 
 /* Keystroke handler for decryption block storage. */
 
